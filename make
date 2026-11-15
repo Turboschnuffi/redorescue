@@ -285,7 +285,8 @@ apt install --yes \
 	firmware-amd-graphics \
 	firmware-realtek \
 	amd64-microcode \
-	intel-microcode
+	intel-microcode \
+	firmware-sof-signed
 perl -p -i -e 's/ non-free-firmware$//' /etc/apt/sources.list
 apt update --yes
 EOL
