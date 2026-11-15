@@ -411,7 +411,7 @@ function exit_app() {
 	killall_ops();
 	// Save empty status
 	set_status(new stdClass());
-	system('killall chromium');
+	// system('killall chromium');
 }
 
 //
@@ -557,7 +557,7 @@ function backup_init() {
 	$disks = get_disks();
 	$status->bytes_total = 0;
 	$status->bytes_done = 0;
-	if (count(get_object_vars($status->parts))<1) return 'No partitions selected';
+	if (count((array)$status->parts)<1) return 'No partitions selected';
 	foreach ($status->parts as $p) {
 		$part_bytes = get_dev_bytes($p);
 		$status->bytes_total += $part_bytes;
@@ -613,7 +613,7 @@ function restore_init() {
 	$disks = get_disks();
 	$status->bytes_total = 0;
 	$status->bytes_done = 0;
-	if (count(get_object_vars($status->parts))<1) return 'No partitions selected';
+	if (count((array)$status->parts)<1) return 'No partitions selected';
 	foreach ($status->parts as $sp=>$tp) {
 		$status->bytes_total += $status->image->parts->$sp->bytes;
 	}
@@ -674,7 +674,7 @@ function verify_init() {
 	$disks = get_disks();
 	$status->bytes_total = 0;
 	$status->bytes_done = 0;
-	if (count(get_object_vars($status->parts))<1) return 'No partitions selected';
+	if (count((array)$status->parts)<1) return 'No partitions selected';
 	foreach ($status->parts as $sp=>$tp) {
 		$status->bytes_total += $status->image->parts->$sp->bytes;
 	}

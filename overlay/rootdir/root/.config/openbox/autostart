@@ -1,3 +1,16 @@
+# Sprache & Tastatur aus dem GRUB-Menü ("Choose language") übernehmen
+SEL_LOC=$(grep -oE 'locales=[a-zA-Z_]+\.UTF-8' /proc/cmdline | cut -d= -f2)
+SEL_KBD=$(grep -oE 'keyboard-layouts=[a-zA-Z]+' /proc/cmdline | cut -d= -f2 | tr '[:upper:]' '[:lower:]')
+
+export LANG="${SEL_LOC:-en_US.UTF-8}"
+export LC_ALL="${SEL_LOC:-en_US.UTF-8}"
+
+if [ "$SEL_KBD" = "ua" ]; then
+    setxkbmap -layout "ua,us" -option "grp:alt_shift_toggle" &
+else
+    setxkbmap "${SEL_KBD:-us}" &
+fi
+
 # Launch network management applet
 nm-applet &
 
@@ -29,4 +42,6 @@ tint2 &
 xhost si:localuser:redo &
 
 # Launch the Redo application in Chromium
-( sleep 1 && sudo -u redo chromium --start-maximized --app=http://localhost ) &
+#( sleep 1 && sudo -u redo chromium --start-maximized --app=http://localhost ) &
+( sleep 1 && sudo -u redo firefox-esr http://localhost ) &
+

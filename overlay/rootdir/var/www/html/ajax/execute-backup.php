@@ -44,7 +44,7 @@ if (!property_exists($status, 'progress')) {
 if (sizeof($status->progress->exec) > 0) {
 	// Parse log output
 	$part_name = $status->progress->exec[0];
-	$part_bytes = $status->details->{$status->progress->exec[0]}->bytes;
+	$part_bytes = (isset($status->details) && isset($status->details->$part_name->bytes)) ? $status->details->$part_name->bytes : get_dev_bytes($part_name);
 	$part_count = sizeof($status->parts);
 	$part_num = sizeof($status->progress->done) + 1;
 	if ($part_num > $part_count) $part_num = $part_count;
@@ -94,13 +94,16 @@ if (sizeof($status->progress->exec) > 0) {
 		}
 		// Return overall progress, if known
 		if ( (sizeof($status->progress->exec) > 0) && (!is_null($part_pct)) ) {
-			$status->bytes_done = 0;
-			foreach ($status->progress->done as $d) $status->bytes_done += $status->details->$d->bytes;
-			$status->bytes_done += intval(($part_pct/100) * $part_bytes);
-			$overall_pct = round((100 * $status->bytes_done) / $status->bytes_total, 2);
-			$return['overall_pct'] = $overall_pct;
-			set_status($status);
-		
+        		$status->bytes_done = 0;
+        		foreach ($status->progress->done as $d) {
+                	$d_bytes = (isset($status->details) && isset($status->details->$d->bytes)) ? $status->details->$d->bytes : get_dev_bytes($d);
+                	$status->bytes_done += $d_bytes;
+        		}
+        		$status->bytes_done += intval((floatval($part_pct)/100) * $part_bytes);
+        		$total_bytes = (!empty($status->bytes_total) && $status->bytes_total > 0) ? $status->bytes_total : $part_bytes;
+        		$overall_pct = ($total_bytes > 0) ? round((100 * $status->bytes_done) / $total_bytes, 2) : round(floatval($part_pct), 2);
+        		$return['overall_pct'] = $overall_pct;
+        		set_status($status);
 		}
 	}
 } else {

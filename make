@@ -17,8 +17,10 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-VER=5.0.0
-BASE=bookworm
+set -e
+
+VER=6.2.13+
+BASE=trixie
 ARCH=amd64
 ROOT=rootdir
 FILE=setup.sh
@@ -96,6 +98,8 @@ script_init() {
 	cat > $ROOT/$FILE <<EOL
 #!/bin/bash
 
+set -e
+
 # System mounts
 mount none -t proc /proc;
 mount none -t sysfs /sys;
@@ -135,32 +139,22 @@ script_build() {
 	else
 		KERN="amd64"
 	fi
-	if [ "$BASE" == "bookworm" ]; then
-		# Bookworm-specific PHP version and packages
-		PHPV="8.2"
-		PKGS="chromium-common chromium-sandbox volumeicon-alsa exfatprogs"
-	elif [ "$BASE" == "bullseye" ]; then
-		# Bullseye-specific PHP version and packages
-		PHPV="7.4"
-		PKGS="chromium-common chromium-sandbox volumeicon-alsa curlftpfs exfat-utils"
-	elif [ "$BASE" == "buster" ]; then
-		# Buster uses PHP 7.3
-		PHPV="7.3"
-		PKGS="chromium-common chromium-sandbox volti obmenu curlftpfs exfat-utils"
-	else
-		# Stretch uses PHP 7.0
-		PHPV="7.0"
-		PKGS="volti obmenu curlftpfs exfat-utils"
-	fi
+        # Debian 13 (Trixie) PHP version
+        PHPV="8.4"
+        PKGS=""
+
 	cat >> $ROOT/$FILE <<EOL
+
 # Install packages
+
 export DEBIAN_FRONTEND=noninteractive
-apt install --no-install-recommends --yes \
+
+	apt install -y \
 	\
-	linux-image-$KERN live-boot systemd-sysv firmware-linux-free sudo \
+	linux-image-amd64 live-boot systemd-sysv firmware-linux-free sudo \
         vim-tiny pm-utils iptables-persistent iputils-ping net-tools wget \
-	openssh-client openssh-server rsync less \
-	\
+	timeshift mc gedit locales keyboard-configuration openssh-client openssh-server rsync less \
+	bash-completion nano \
 	xserver-xorg x11-xserver-utils xinit openbox obconf slim \
 	plymouth plymouth-themes compton dbus-x11 libnotify-bin xfce4-notifyd \
 	gir1.2-notify-0.7 tint2 nitrogen xfce4-appfinder xfce4-power-manager \
@@ -171,11 +165,24 @@ apt install --no-install-recommends --yes \
 	\
 	beep laptop-detect os-prober discover lshw-gtk hdparm smartmontools \
 	nmap time lvm2 gparted gnome-disk-utility baobab gddrescue testdisk \
-	dosfstools ntfs-3g reiserfsprogs reiser4progs hfsutils jfsutils \
+	dosfstools ntfs-3g jfsutils \
 	smbclient cifs-utils nfs-common sshfs partclone pigz yad f2fs-tools \
 	exfat-fuse btrfs-progs \
+        firefox-esr firefox-esr-l10n-de firefox-esr-l10n-es-es firefox-esr-l10n-fr \
+        firefox-esr-l10n-it firefox-esr-l10n-nl firefox-esr-l10n-pl firefox-esr-l10n-uk \
+	fonts-dejavu volumeicon-alsa exfatprogs locales keyboard-configuration timeshift \
+	mc gedit gnome-screenshot lxpolkit \
 	\
-	nginx php-fpm php-cli chromium $PKGS
+	nginx php-fpm php-cli $PKGS
+
+for loc in de_DE.UTF-8 en_US.UTF-8 es_ES.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 nl_NL.UTF-8 pl_PL.UTF-8 uk_UA.UTF-8; do
+	sed -i "s/^# *\($loc\)/\1/" /etc/locale.gen
+	done
+
+locale-gen
+
+update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
 
 # Modify /etc/issue banner
 perl -p -i -e 's/^D/Redo Rescue $VER\nBased on D/' /etc/issue
@@ -190,12 +197,25 @@ systemctl disable systemd-timesyncd.service
 systemctl disable ssh
 rm -f /etc/ssh/ssh_host_*
 
-# Prevent chromium "save password" prompts
-mkdir -p /etc/chromium/policies/managed
-cat > /etc/chromium/policies/managed/no-password-management.json <<END
+# Prevent Firefox ESR welcome tabs, telemetry and password prompts
+mkdir -p /etc/firefox-esr/policies
+cat > /etc/firefox-esr/policies/policies.json <<END
 {
-    "AutoFillEnabled": false,
-    "PasswordManagerEnabled": false
+  "policies": {
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DisablePocket": true,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "DontCheckDefaultBrowser": true,
+    "OfferToSaveLogins": false,
+    "PasswordManagerEnabled": false,
+    "Homepage": {
+      "URL": "http://localhost",
+      "Locked": false,
+      "StartPage": "homepage"
+    }
+  }
 }
 END
 
@@ -251,7 +271,7 @@ script_add_nonfree() {
 	cat >> $ROOT/$FILE <<EOL
 echo "Adding non-free packages..."
 # Briefly activate repos to install non-free firmware packages
-perl -p -i -e 's/main$/main non-free non-free-firmware/' /etc/apt/sources.list
+perl -p -i -e 's/main$/main contrib non-free-firmware/' /etc/apt/sources.list
 apt update --yes
 # WARNING: Wireless connections are NOT recommended for backup/restore!
 #
@@ -260,11 +280,13 @@ apt update --yes
 #
 apt install --yes \
 	firmware-linux-nonfree \
-	firmware-misc-nonfree \
+	firmware-intel-graphics \
+	firmware-mediatek \
 	firmware-amd-graphics \
+	firmware-realtek \
 	amd64-microcode \
 	intel-microcode
-perl -p -i -e 's/ non-free non-free-firmware$//' /etc/apt/sources.list
+perl -p -i -e 's/ non-free-firmware$//' /etc/apt/sources.list
 apt update --yes
 EOL
 }
@@ -292,7 +314,7 @@ rm -rf /usr/share/doc
 rm -rf /usr/share/man
 
 # Clean up and exit
-apt-get autoremove && apt-get clean
+apt autopurge -y  && apt autoclean -y
 rm -rf /var/lib/dbus/machine-id
 rm -rf /tmp/*
 rm -f /etc/resolv.conf
@@ -352,15 +374,21 @@ create_livefs() {
 	chroot $ROOT/ /bin/bash -c "chown -R www-data: /var/www/html"
 
 	# Enable startup of Redo monitor service
-	chroot $ROOT/ /bin/bash -c "chmod 644 /etc/systemd/system/redo.service"
-	chroot $ROOT/ /bin/bash -c "systemctl enable redo"
+	# chroot $ROOT/ /bin/bash -c "chmod 644 /etc/systemd/system/redo.service"
+	# chroot $ROOT/ /bin/bash -c "systemctl enable redo"
+
+	chmod 644 $ROOT/etc/systemd/system/redo.service
+	mkdir -p $ROOT/etc/systemd/system/multi-user.target.wants
+	ln -sf /etc/systemd/system/redo.service $ROOT/etc/systemd/system/multi-user.target.wants/redo.service
 
 	# Update version number
 	echo $VER > $ROOT/var/www/html/VERSION
 
 	# Compress live filesystem
 	echo -e "$yel* Compressing live filesystem...$off"
-	mksquashfs $ROOT/ image/live/filesystem.squashfs -e boot
+	# mksquashfs $ROOT/ image/live/filesystem.squashfs -e boot
+	mksquashfs $ROOT/ image/live/filesystem.squashfs -no-xattrs -e boot
+
 }
 
 create_iso() {
@@ -466,6 +494,7 @@ create_uefi_iso() {
 	cp /usr/lib/shim/shimx64.efi.signed image/EFI/boot/bootx64.efi
 	cp /usr/lib/grub/x86_64-efi-signed/grubx64.efi.signed image/EFI/boot/grubx64.efi
 	cp -r /usr/lib/grub/x86_64-efi image/boot/grub/
+	cp -r /usr/lib/grub/i386-pc image/boot/grub/
 
 	# Create EFI partition
 	UFAT="scratch/efiboot.img"
@@ -474,14 +503,25 @@ create_uefi_iso() {
 	mcopy -s -i $UFAT image/EFI ::
 
 	# Create image for BIOS and CD-ROM
+	# grub-mkstandalone \
+	#	--format=i386-pc \
+	#	--output=scratch/core.img \
+	#	--install-modules="linux normal iso9660 biosdisk memdisk search help tar ls all_video font gfxmenu png" \
+	#	--modules="linux normal iso9660 biosdisk search help all_video font gfxmenu png" \
+	#	--locales="" \
+	#	--fonts="" \
+	#	"boot/grub/grub.cfg=image/boot/grub/grub.cfg"
+	#
+
 	grub-mkstandalone \
 		--format=i386-pc \
 		--output=scratch/core.img \
-		--install-modules="linux normal iso9660 biosdisk memdisk search help tar ls all_video font gfxmenu png" \
-		--modules="linux normal iso9660 biosdisk search help all_video font gfxmenu png" \
+		--install-modules="linux normal iso9660 biosdisk part_msdos part_gpt fat exfat ntfs memdisk search search_fs_file search_fs_uuid search_label help tar ls all_video font gfxmenu png" \
+		--modules="linux normal iso9660 biosdisk part_msdos part_gpt fat search search_fs_file help all_video font gfxmenu png" \
 		--locales="" \
 		--fonts="" \
 		"boot/grub/grub.cfg=image/boot/grub/grub.cfg"
+
 
 	# Prepare image for UEFI
 	cat /usr/lib/grub/i386-pc/cdboot.img scratch/core.img > scratch/bios.img

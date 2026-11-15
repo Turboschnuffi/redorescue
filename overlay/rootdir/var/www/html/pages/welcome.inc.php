@@ -3,22 +3,36 @@
 
 <p>Easily create a snapshot of your system or completely restore from one. Click an option to begin:</p>
 
+<style>
+  .custom-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .custom-btn:hover {
+    transform: scale(1.06);
+  }
+  .custom-btn:focus {
+    outline: none;
+  }
+</style>
+
 <div id="welcome">
   <p class="text-center">
 
-    <button onClick="showPage('backup-1');" class="btn btn-lg btn-info">
-      <p><i class="fas fa-upload fa-4x"></i></p>
-      <div>Backup</div>
+    <button onClick="showPage('backup-1');" class="custom-btn" title="Backup">
+      <img src="/images/button_backup.png" width="140" alt="Backup">
     </button>
 
-    <button onClick="showPage('verify-1');" class="btn btn-lg btn-success">
-      <p><i class="fas fa-check-circle fa-4x"></i></p>
-      <div>Verify</div>
+    <button onClick="showPage('verify-1');" class="custom-btn" title="Verify">
+      <img src="/images/button_verify.png" width="140" alt="Verify">
     </button>
 
-    <button onClick="showPage('restore-1');" class="btn btn-lg btn-danger">
-      <p><i class="fas fa-download fa-4x"></i></p>
-      <div>Restore</div>
+    <button onClick="showPage('restore-1');" class="custom-btn" title="Restore">
+      <img src="/images/button_restore.png" width="140" alt="Restore">
     </button>
 
   </p>
@@ -31,6 +45,6 @@
 
 <script>
 function showPage(id) {
-	$('#content').html('<?php print LOADING_HTML; ?>').load('action.php?page='+id);
+        $('#content').html('<?php print LOADING_HTML; ?>').load('action.php?page='+id);
 }
 </script>

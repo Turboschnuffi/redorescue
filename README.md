@@ -1,108 +1,87 @@
-# Redo Rescue
-
 <p align="center">
-  <a href="http://redorescue.com/"><img width="100%" src="http://redorescue.com/images/header.png"></a>
+  <img src="assets/logo.png" alt="Redo Rescue 6.2.13+ Logo" width="320">
 </p>
 
-[![Download Redo Rescue: Backup and Recovery](https://img.shields.io/sourceforge/dt/redobackup.svg)](https://sourceforge.net/projects/redobackup/files/latest/download) [![Download Redo Rescue: Backup and Recovery](https://img.shields.io/sourceforge/dw/redobackup.svg)](https://sourceforge.net/projects/redobackup/files/latest/download)
+# Redo Rescue 6.2.13+ (Debian 13 "Trixie" Community Edition)
+
+An updated, modern community fork of **Redo Rescue** based on **Debian 13 (Trixie)**.  
+This edition brings full hardware support for modern PCs while keeping reliable compatibility with older Legacy-BIOS machines.
+
+---
+
+## 📥 Download (Ready-to-Use ISO)
+
+You don't need to build the image yourself!  
+Download the latest pre-built `.iso` file directly from the **[Releases](../../releases)** page and write it to a USB flash drive using **Rufus**, **BalenaEtcher**, or `dd`.
+
+---
+
+## 🖼️ Screenshots
+
+| Boot Menu (GRUB Multi-Language) | Refreshed Web Interface |
+| :---: | :---: |
+| ![Boot Menu](screenshots/boot-grub.png) | ![Web UI](screenshots/welcome.png) |
+
+---
+
+## 📋 Overview & Key Features
+
+* **Modern Debian 13 (Trixie) Base:** Built on Debian 13 with an up-to-date Linux kernel, current `non-free-firmware` packages (modern NVMe controllers, Wi-Fi, and Ethernet chipsets), and **PHP 8.4**.
+* **True Hybrid Boot (UEFI & Legacy BIOS):** Boots seamlessly on modern 64-bit UEFI hardware as well as older Legacy-BIOS systems—including full compatibility with standard **Rufus ISO mode** (`i386-pc` GRUB modules included) and a **Safe Video Mode** fallback.
+* **Verified Boot Compatibility:** Successfully tested with **Rufus (both MBR and GPT partition schemes)**, **VMware**, modern UEFI systems, and legacy BIOS hardware.
+* **European Multi-Language Boot Menu (8 Languages):** Choose your language directly in the GRUB boot menu (**Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian**). Desktop menus, system clock/date formatting, keyboard layout, and Firefox ESR adapt automatically.
+* **Built-in Web UI Translation via Firefox ESR:** Replaced Chromium with **Firefox ESR** (including language packs), allowing one-click translation of the Redo Rescue web interface into your selected language, alongside pre-installed **Timeshift**, **Midnight Commander (`mc`)**, **Gedit**, **Gnome-Screenshot** and **`exfatprogs`**.
+* **Refreshed simple Web-UI**. 
+
+---
+
+## ⚠️ Known Limitations (Apple / Mac Hardware)
+
+* **Legacy Apple Mac / HFS+ Support Removed:** Support for older Intel Macs via Apple Partition Map (`-isohybrid-apm-hfsplus`) and `hfsprogs` has been removed because `hfsprogs` is no longer included in Debian 13 (Trixie).
+* Modern 64-bit UEFI Macs (approx. 2012 and newer) may still boot via the standard `EFI/BOOT/BOOTX64.EFI` bootloader, but Apple-specific HFS+ tools and legacy Mac boot hooks are not included.
+* **Older Hardware & USB 2.0 Speeds:** When booting from or backing up to a **USB 2.0** drive on older machines, initial system startup and block scanning (*"Finding areas with data..."*) may take a few minutes. Please be patient—this is normal behavior due to USB 2.0 bandwidth limits and not a system freeze or error.
 
 
-## About
+---
 
-**Redo Rescue** (also known as [Redo Backup](https://github.com/redobackup/redobackup)) is a live CD/USB system that creates and restores snapshots of your system. Restore the image, even to a new blank drive, and recover in minutes from ransomware and viruses, deletions, hardware damage, and hackers.
+## 🇩🇪 Kurzübersicht (Deutsch)
 
-**This is the official Redo project developed since 2010 &mdash; now maintained on GitHub!**
+Eine aktualisierte Community-Edition von **Redo Rescue** auf Basis von **Debian 13 (Trixie)** für moderne wie auch ältere PC-Hardware:
 
-
-## Screenshots
-
-<div>
-  <p align="center">
-    <a href="http://redorescue.com"><img src="http://redorescue.com/images/screenshots/thumbs/boot.jpg"></a>&nbsp;
-    <a href="http://redorescue.com"><img src="http://redorescue.com/images/screenshots/thumbs/welcome.jpg"></a>
-  </p>
-  <p align="center">
-    <a href="http://redorescue.com"><img src="http://redorescue.com/images/screenshots/thumbs/backup-progress.jpg"></a>&nbsp;
-    <a href="http://redorescue.com"><img src="http://redorescue.com/images/screenshots/thumbs/detailed-logs.jpg"></a>
-  </p>
-</div>
-
-<p align="center"><b>For more screenshots and project details visit http://redorescue.com</b></p>
-
-## Features
-
-  * Over 2.3 million downloads
-  * Free and open source software
-  * Create a backup image in a few clicks
-  * Live system; works on machines that won't even boot
-  * Provides VNC access for remote assistance
-  * Bare-metal recovery restores master boot record, partition table
-  * Selectively restore certain parts
-  * Optionally re-map original partitions to different places
-  * UEFI Secure Boot support
-  * Based on 64-bit Debian Linux
-  * ISO can be written to CD or USB
-  * Error handling and low space warnings
-  * Detailed logs can be copied to clipboard
-  * Supports restoring images made with v1.0.4 release
-  * Browser-based application with PHP backend
-  * Beautiful user interface
-  * System tools and diagnostic programs included in image
-  * Unified backup file format with ability to add notes
-  * Shared network drive search and detection
-  * Support for various block devices
-  * Read/write support for Samba/CIFS shares, NFS shares, SSH filesystems, and FTP servers
+* **Fertige ISO herunterladen:** Die fertige `.iso`-Datei findest du direkt rechts unter **[Releases](../../releases)** – einfach mit **Rufus** (getestet), **BalenaEtcher** oder `dd` auf einen USB-Stick schreiben.
+* **Aktueller Unterbau:** Debian 13 (*Trixie*) mit modernem Kernel, aktuellen Firmware-Paketen (`non-free-firmware`) und **PHP 8.4**.
+* **UEFI & Legacy-BIOS / Rufus-kompatibel:** Bootet zuverlässig im UEFI- und Legacy-BIOS-Modus (erfolgreich getestet mit **Rufus MBR & GPT**, **VMware** sowie echter UEFI- und Legacy-Hardware) sowie über den **Safe Video Mode**.
+* **Mehrsprachiges Bootmenü (8 Sprachen):** Direkte Sprachauswahl im GRUB-Startmenü (*Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian*) mit automatischer Umstellung von Desktop, Tastaturlayout, Datumsformat und Firefox ESR.
+* **Direkte Übersetzung der Weboberfläche & Zusatztools:** **Firefox ESR** statt Chromium (inklusive integrierter Seitenübersetzung für die Weboberfläche) sowie **Timeshift**, **Midnight Commander (`mc`)**, **Gedit**, **Gnome-Screenshot** und **`exfatprogs`** direkt vorinstalliert.
+* **Hinweis zu Apple / Mac:** Die alte Mac-Boot-Unterstützung (`-isohybrid-apm-hfsplus`) sowie `hfsprogs` wurden entfernt, da `hfsprogs` in Debian 13 (*Trixie*) nicht mehr enthalten ist.
+* **Ältere Hardware & USB 2.0:** Beim Booten oder Sichern über eine **USB-2.0-Schnittstelle** auf älteren Rechnern können der Systemstart sowie die anfängliche Blocksuche (*„Finding areas with data...“*) etwas Zeit in Anspruch nehmen. Etwas Geduld steigert die Lebensqualität.
 
 
-## Download
+---
+## 🚀 Building from Source
 
-**The latest ISO image can be downloaded from SourceForge:**
+Run the build script on a Debian-based host system (requires `debootstrap`, `xorriso`, `squashfs-tools`, `grub-pc-bin`, and `grub-efi-amd64-bin`):
 
-[![Download Redo Rescue: Backup and Recovery](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/redobackup/files/latest/download)
+```bash
+git clone https://github.com/Turboschnuffi/redorescue.git
+cd redorescue
+chmod +x make
+sudo ./make
+```
 
+### Customizing the System (`chroot` Mode)
 
-## Examples
+If you want to install additional packages or modify the root filesystem before building the ISO, you can enter the interactive `chroot` environment:
 
-Redo Rescue can be used in countless ways to recover from disaster, replicate a system, or just set things back to how they were before. Here are some example use cases:
+```bash
+sudo ./make changes
+# Make your modifications inside the chroot environment, then leave it with:
+exit
+```
 
-* You've installed and activated Windows, configured all the necessary drivers, and installed an office suite for a family member. Because of the time involved, you don't want to have to repeat this process again. Use Redo Rescue to save a backup image to a USB stick in case the hard drive crashes.
+---
 
-* A teacher has dozens of identical machines in her classroom that run the same Linux-based operating system. She can use Redo Rescue to make a snapshot image of the working system, so that if a student's system becomes unusable she can easily restore the system to working condition in minutes.
+## 📜 License & Credits
 
-* A company laptop has many different software components that require tedious configuration, and its users are more likely to click on links to malware or viruses. Use Redo Rescue to resize the existing partitions, create a backup partition on the same drive, and save a backup image.
-
-* An office server needs to be upgraded with all new hardware, but the old system needs to stay running while the replacement is prepared. Use Redo Rescue to create an image, restore it to new hardware, and then make the switch with minimal downtime, while preserving the old machine in case of failure.
-
-
-## Warning
-
-**Redo Rescue is designed to restore a backup image to the same system it was taken from.** Even a byte-for-byte clone of a Windows drive to a target system that is nearly identical may fail to boot, regardless of the backup software used. Certain system changes can easily render a Windows, Mac, or Linux machine unbootable: changing hardware components, adding/removing/swapping disks, making significant configuration changes, or restoring to a different machine are all likely to cause boot issues. Similarly, swapping, moving, resizing, or reordering partitions will almost certainly render most operating systems unbootable. After such changes, an entire backup can be restored successfully (and all files are safely stored on the drive), yet the operating system may fail to boot. _This is not a limitation of the backup solution, but the result of changes to the system configuration. We strongly recommend creating a new backup image after changes are made to your system._
-
-Redo Rescue relies on [sfdisk](https://manpages.debian.org/stretch/util-linux/sfdisk.8.en.html) to backup and restore partition tables, and [partclone](https://manpages.debian.org/stretch/partclone/partclone.8.en.html) to create and restore backups of the data on each partition. Both are considered very reliable but could contain unknown bugs.
-
-
-## Notes
-
-* By default the system logs in as the `root` user with password `redo`.
-
-
-## Build
-
-To build an ISO image from within Debian Linux:
-
-  1. `git clone https://github.com/redorescue/redorescue.git`
-  2. `cd redorescue`
-  3. `sudo ./make`
-
-After building, it's easy to modify a file or install a package without rebuilding and downloading all the packages again:
-
-  1. `sudo ./make changes`
-  1. Make your changes to the live system image
-  1. `exit` and the ISO will be updated automatically
-
-Source code for previous releases can be found on [SourceForge](https://sourceforge.net/projects/redobackup/files/src/).
-
-
-## License
-
-**Redo Rescue** is released under the GNU GPLv3. Redo Rescue's distinctive logos and graphics are not released under the GNU GPLv3. If you would like to create a fork of Redo Rescue, you must create distinctly different graphic assets to identify it.
+* **Original Project:** Based on [Redo Rescue](https://github.com/redorescue/redorescue.git) by **Zebradots / Redo Rescue Contributors**.
+* **License:** Code and build scripts are distributed under the **GNU General Public License v3.0 (GPLv3)** — see the `LICENSE` file for full details. Custom mascot artwork and button graphics included in the web interface remain the property of the release author.
