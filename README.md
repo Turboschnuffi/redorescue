@@ -21,6 +21,8 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 | Boot Menu (GRUB Multi-Language) | Refreshed Web Interface |
 | :---: | :---: |
 | ![Boot Menu](screenshots/boot-grub.png) | ![Web UI](screenshots/welcome.png) |
+| ![Backup](screenshots/backup.png) | ![Verify](screenshots/verify.png) |
+| ![Verify II](screenshots/verif_compl.png) | ![Restore](screenshots/restore.png) |
 
 ---
 
@@ -60,12 +62,11 @@ Eine aktualisierte Community-Edition von **Redo Rescue** auf Basis von **Debian 
 ---
 ## 🚀 Building from Source
 
-Run the build script on a Debian-based host system (requires `debootstrap`, `xorriso`, `squashfs-tools`, `grub-pc-bin`, and `grub-efi-amd64-bin`):
+Run the build script on any Debian-based host system (all required build dependencies are installed automatically by the script):
 
 ```bash
 git clone https://github.com/Turboschnuffi/redorescue.git
 cd redorescue
-chmod +x make
 sudo ./make
 ```
 
