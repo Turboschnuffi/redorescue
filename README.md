@@ -18,7 +18,7 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 
 ## 🖼️ Screenshots
 
-| Boot Menu (GRUB Multi-Language) | Refreshed Web Interface |
+| Boot Menu (GRUB Multi-Language) | Refreshed simple Web-UI |
 | :---: | :---: |
 | ![Boot Menu](screenshots/boot-grub.png) | ![Web UI](screenshots/welcome.png) |
 | ![Backup](screenshots/backup.png) | ![Verify](screenshots/verify.png) |
