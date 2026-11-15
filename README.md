@@ -86,3 +86,13 @@ exit
 
 * **Original Project:** Based on [Redo Rescue](https://github.com/redorescue/redorescue.git) by **Zebradots / Redo Rescue Contributors**.
 * **License:** Code and build scripts are distributed under the **GNU General Public License v3.0 (GPLv3)** — see the `LICENSE` file for full details. Custom mascot artwork and button graphics included in the web interface remain the property of the release author.
+---
+
+---
+
+## ☕ Support / Käffchen? 
+
+If this community fork helped rescue your system or saved you some time, feel free to support future updates and hardware testing with a small tip!  
+Wenn Dir Redo Rescue geholfen, Zeit oder womöglich Schlimmeres erspart hat – ich freue mich immer über ein virtuelles Trinkgeld.
+
+* **[Buy me a coffee on Ko-fi](https://ko-fi.com/turboschnuffi)**
