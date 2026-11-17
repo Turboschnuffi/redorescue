@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="Redo Rescue 6.2.13+ Logo" width="640">
+  <img src="assets/logo.png" alt="Redo Rescue 6.2.13+ Logo" width="1000">
 </p>
 
 # Redo Rescue 6.2.13+ (Debian 13 "Trixie" Community Edition)
