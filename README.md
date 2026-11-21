@@ -53,7 +53,7 @@ gParted, gEdit, Timeshift, midnight-commander, gnome-Screenshot, terminal, syste
 
 Eine aktualisierte Community-Edition von **Redo Rescue** auf Basis von **Debian 13 (Trixie)** für moderne wie auch ältere PC-Hardware:
 
-* **REDO rescue** startet PCs in ein Debian Live-System und erstellt Backups (oder stellt diese wieder her) von ganzen Laufwerken oder einzelnen Patitionen.
+* **REDO rescue** startet PCs in ein Debian Live-System und erstellt Backups (oder stellt diese wieder her) von ganzen Laufwerken oder einzelnen Partitionen.
 * Mit dabei sind **gParted**, **gEdit**, **Gnome-Screenshot(ohne s)**, **midnight-Commander**, **Timeshift** - für reibungslosen Support. 
 * **Fertige ISO herunterladen:** Die fertige `.iso`-Datei findest du direkt rechts unter **[Releases](../../releases)** – einfach mit **Rufus** (getestet), **BalenaEtcher** oder `dd` auf einen USB-Stick schreiben (MBR- und UEFI-/GPT-Partitionschema unterstützt).
 * **Aktueller Unterbau:** Debian 13 (*Trixie*) mit modernem Kernel, aktuellen Firmware-Paketen (`non-free-firmware`) und **PHP 8.4**.
