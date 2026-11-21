@@ -98,6 +98,6 @@ exit
 ## ☕ Support / Käffchen? 
 
 If this community fork helped rescue your system or saved you some time, feel free to support future updates and hardware testing with a small tip!  
-Wenn Dir Redo Rescue geholfen, Zeit oder womöglich Schlimmeres erspart hat – ich freue mich immer über ein virtuelles Trinkgeld.
+Wenn Dir REDO rescue geholfen, Zeit oder womöglich Schlimmeres erspart hat – ich freue mich immer über ein Trinkgeld.
 
 * **[Buy me a coffee on Ko-fi](https://ko-fi.com/turboschnuffi)**
