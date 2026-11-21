@@ -28,7 +28,8 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 
 ## 📋 Overview & Key Features
 
-* **Modern Debian 13 (Trixie) Base:** Built on Debian 13 with an up-to-date Linux kernel, current `non-free-firmware` packages (modern NVMe controllers, Wi-Fi, and Ethernet chipsets), and **PHP 8.4**.
+* **Redo Rescue** let you boot into a Debian live system and take backups from your hard drive(s) or partitions of them or recover them - even on a new drive.
+* * **Modern Debian 13 (Trixie) Base:** Built on Debian 13 with an up-to-date Linux kernel, current `non-free-firmware` packages (modern NVMe controllers, Wi-Fi, and Ethernet chipsets), and **PHP 8.4**.
 * **True Hybrid Boot (UEFI & Legacy BIOS):** Boots seamlessly on modern 64-bit UEFI hardware as well as older Legacy-BIOS systems—including full compatibility with standard **Rufus ISO mode** (`i386-pc` GRUB modules included) and a **Safe Video Mode** fallback.
 * **Verified Boot Compatibility:** Successfully tested with **Rufus (both MBR and GPT partition schemes)**, **VMware**, modern UEFI systems, and legacy BIOS hardware.
 * **European Multi-Language Boot Menu (8 Languages):** Choose your language directly in the GRUB boot menu (**Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian**). Desktop menus, system clock/date formatting, keyboard layout, and Firefox ESR adapt automatically.
@@ -50,6 +51,7 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 
 Eine aktualisierte Community-Edition von **Redo Rescue** auf Basis von **Debian 13 (Trixie)** für moderne wie auch ältere PC-Hardware:
 
+* **Redo Rescue** startet PCs in ein Debian Live System und erstellt Backups (oder stellt diese wieder her) von ganzen Laufwerken oder einzelnen Patitionen.
 * **Fertige ISO herunterladen:** Die fertige `.iso`-Datei findest du direkt rechts unter **[Releases](../../releases)** – einfach mit **Rufus** (getestet), **BalenaEtcher** oder `dd` auf einen USB-Stick schreiben.
 * **Aktueller Unterbau:** Debian 13 (*Trixie*) mit modernem Kernel, aktuellen Firmware-Paketen (`non-free-firmware`) und **PHP 8.4**.
 * **UEFI & Legacy-BIOS / Rufus-kompatibel:** Bootet zuverlässig im UEFI- und Legacy-BIOS-Modus (erfolgreich getestet mit **Rufus MBR & GPT**, **VMware** sowie echter UEFI- und Legacy-Hardware) sowie über den **Safe Video Mode**.
