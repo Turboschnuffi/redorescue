@@ -12,7 +12,7 @@ This edition brings full hardware support for modern PCs while keeping reliable 
 ## 📥 Download (Ready-to-Use ISO)
 
 You don't need to build anything yourself!  
-Download the latest pre-built `.iso` file directly from the **[Releases](../../releases)** page and write it to a USB flash drive using **Rufus**, **BalenaEtcher**, or `dd`.
+Download the latest pre-built `.iso` file directly from the **[Releases](../../releases)** page and write it to a USB flash drive using **Rufus**, **BalenaEtcher**, or `dd`. PLEASE **verify** your download!!!
 
 ---
 
