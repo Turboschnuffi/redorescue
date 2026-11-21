@@ -28,13 +28,15 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 
 ## 📋 Overview & Key Features
 
-* **Redo Rescue** let you boot into a Debian live system and take backups from your hard drive(s) or partitions of them or recover them - even on a new drive.
-* * **Modern Debian 13 (Trixie) Base:** Built on Debian 13 with an up-to-date Linux kernel, current `non-free-firmware` packages (modern NVMe controllers, Wi-Fi, and Ethernet chipsets), and **PHP 8.4**.
+* **Redo Rescue** let you boot into a Debian live system and take backups from your hard drive(s) or partitions of them or recover them - even on a new drive. Built-in **Application** for optimized support:
+gParted, gEdit, Timeshift, midnight-commander, gnome-Screenshot, terminal, system-info.
+* **Modern Debian 13 (Trixie) Base:** Built on Debian 13 with an up-to-date Linux kernel, current `non-free-firmware` packages (modern NVMe controllers, Wi-Fi, and Ethernet chipsets), and **PHP 8.4**.
 * **True Hybrid Boot (UEFI & Legacy BIOS):** Boots seamlessly on modern 64-bit UEFI hardware as well as older Legacy-BIOS systems—including full compatibility with standard **Rufus ISO mode** (`i386-pc` GRUB modules included) and a **Safe Video Mode** fallback.
 * **Verified Boot Compatibility:** Successfully tested with **Rufus (both MBR and GPT partition schemes)**, **VMware**, modern UEFI systems, and legacy BIOS hardware.
-* **European Multi-Language Boot Menu (8 Languages):** Choose your language directly in the GRUB boot menu (**Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian**). Desktop menus, system clock/date formatting, keyboard layout, and Firefox ESR adapt automatically.
-* **Built-in Web UI Translation via Firefox ESR:** Replaced Chromium with **Firefox ESR** (including language packs), allowing one-click translation of the Redo Rescue web interface into your selected language, alongside pre-installed **Timeshift**, **Midnight Commander (`mc`)**, **Gedit**, **Gnome-Screenshot** and **`exfatprogs`**.
-* **Refreshed simple Web-UI**. 
+* **European Multi-Language Boot Menu (8 Languages):** Choose your language directly in the GRUB boot menu (**Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian**). Desktop menus, system clock/date formatting, keyboard layout, and Firefox ESR adapt automatically. Modify grub-configuration to add more or your special language. 
+* Replaced Chromium with **Firefox ESR** (including language packs), allowing one-click translation of the Redo Rescue web interface into your selected languager.
+* **Refreshed simple Web-UI**.
+* **Add or modify** the Debian-, software- und system-environment for your needs (see build-instructions).
 
 ---
 
@@ -52,11 +54,12 @@ Download the latest pre-built `.iso` file directly from the **[Releases](../../r
 Eine aktualisierte Community-Edition von **Redo Rescue** auf Basis von **Debian 13 (Trixie)** für moderne wie auch ältere PC-Hardware:
 
 * **Redo Rescue** startet PCs in ein Debian Live System und erstellt Backups (oder stellt diese wieder her) von ganzen Laufwerken oder einzelnen Patitionen.
-* **Fertige ISO herunterladen:** Die fertige `.iso`-Datei findest du direkt rechts unter **[Releases](../../releases)** – einfach mit **Rufus** (getestet), **BalenaEtcher** oder `dd` auf einen USB-Stick schreiben.
+* Mit dabei sind **gParted**, **gEdit**, **Gnome-Screenshot(ohne s)**, **midnight-Commander**, **Timeshift** - für reibungslosen Support. 
+* **Fertige ISO herunterladen:** Die fertige `.iso`-Datei findest du direkt rechts unter **[Releases](../../releases)** – einfach mit **Rufus** (getestet), **BalenaEtcher** oder `dd` auf einen USB-Stick schreiben (MBR- und UEFI-/GPT-Partitionschema unterstützt).
 * **Aktueller Unterbau:** Debian 13 (*Trixie*) mit modernem Kernel, aktuellen Firmware-Paketen (`non-free-firmware`) und **PHP 8.4**.
-* **UEFI & Legacy-BIOS / Rufus-kompatibel:** Bootet zuverlässig im UEFI- und Legacy-BIOS-Modus (erfolgreich getestet mit **Rufus MBR & GPT**, **VMware** sowie echter UEFI- und Legacy-Hardware) sowie über den **Safe Video Mode**.
-* **Mehrsprachiges Bootmenü (8 Sprachen):** Direkte Sprachauswahl im GRUB-Startmenü (*Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian*) mit automatischer Umstellung von Desktop, Tastaturlayout, Datumsformat und Firefox ESR.
-* **Direkte Übersetzung der Weboberfläche & Zusatztools:** **Firefox ESR** statt Chromium (inklusive integrierter Seitenübersetzung für die Weboberfläche) sowie **Timeshift**, **Midnight Commander (`mc`)**, **Gedit**, **Gnome-Screenshot** und **`exfatprogs`** direkt vorinstalliert.
+* **UEFI & Legacy-BIOS / Rufus-kompatibel:** Bootet zuverlässig im UEFI- und Legacy-BIOS-Modus (erfolgreich bis zur **Erschöpfung** getestet mit **Rufus MBR & GPT**, **VMware** sowie echter UEFI- und Legacy-Hardware) sowie über den **Safe Video Mode**.
+* **Mehrsprachiges anpassbares Bootmenü (8 Sprachen):** Direkte Sprachauswahl im GRUB-Startmenü (*Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Ukrainian*) mit automatischer Umstellung von Desktop, Tastaturlayout, Datumsformat und Firefox ESR.
+* **Direkte Übersetzung der Weboberfläche via ** **Firefox ESR** (ersetzt Chromium). 
 * **Hinweis zu Apple / Mac:** Die alte Mac-Boot-Unterstützung (`-isohybrid-apm-hfsplus`) sowie `hfsprogs` wurden entfernt, da `hfsprogs` in Debian 13 (*Trixie*) nicht mehr enthalten ist.
 * **Ältere Hardware & USB 2.0:** Beim Booten oder Sichern über eine **USB-2.0-Schnittstelle** auf älteren Rechnern können der Systemstart sowie die anfängliche Blocksuche (*„Finding areas with data...“*) etwas Zeit in Anspruch nehmen. Etwas Geduld steigert die Lebensqualität.
 
